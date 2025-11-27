@@ -3,7 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("todo-input");
   const list = document.getElementById("todo-list");
 
-  let filter = "all"; // 'all' | 'active' | 'completed'
+  let filter = "all"; // 'all' | 'active' | 'completed';
+
+  const clearCompletedBtn = document.getElementById('clear-completed');
+
+  clearCompletedBtn.addEventListener('click', () => {
+    // remove tasks completadas do array
+    tasks = tasks.filter(task => task.completed === false);
+    saveTasks();
+    renderTasks(tasks);
+  });
 
   // Try to load tasks from localStorage
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
