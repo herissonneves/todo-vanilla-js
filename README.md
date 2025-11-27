@@ -2,6 +2,13 @@
 
 A TODO list web application built with **vanilla HTML, CSS and JavaScript** - supports adding, removing, marking tasks as completed, persistence, with `localStorage`, and filtering by status (all / active / completed).
 
+## Demo
+
+![Todo List Demo - Add and Remove](demo/add-and-remove.gif)
+![Todo List Demo - Persistence](demo/persistence.gif)
+![Todo List Demo - Filter](demo/filter.gif)
+![Todo List Demo - Clear completed](demo/clear-completed.gif)
+
 ## 🚀 Features
 
 - Add a new task
