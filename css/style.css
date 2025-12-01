@@ -574,9 +574,9 @@ body {
 
 #todo-list li {
     display: flex;
+    align-items: center;
     min-height: 3.5rem;
     justify-content: center;
-    align-items: center;
     padding: 0.5rem 1rem;
     gap: 1rem;
     flex: 1 0 0;
@@ -587,6 +587,12 @@ body {
 #todo-list li.completed span {
     text-decoration: line-through;
     opacity: 0.6;
+}
+
+#todo-list li div.leading-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .remove-btn {

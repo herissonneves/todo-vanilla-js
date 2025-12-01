@@ -14,8 +14,18 @@ export function renderTasks(filter = 'all') {
       const li = document.createElement('li');
       li.setAttribute("data-id", task.id);
 
-      const itemDiv = document.createElement('div');
-      itemDiv.classList.add('todo-item');
+      const leadingElement = document.createElement('div');
+      leadingElement.classList.add('leading-element');
+
+      const checkboxes = document.createElement('div');
+      checkboxes.classList.add('checkboxes');
+
+      leadingElement.appendChild(checkboxes);
+
+      const stateLayer = document.createElement('div');
+      stateLayer.classList.add('state-layer');
+
+      checkboxes.appendChild(stateLayer);
 
       const checkbox = document.createElement('input');
       checkbox.setAttribute('type', 'checkbox');
@@ -24,6 +34,8 @@ export function renderTasks(filter = 'all') {
         toggleTask(task.id);
         renderTasks(filter);
       });
+
+      stateLayer.appendChild(checkbox);
 
       const span = document.createElement('span');
       span.textContent = task.text;
@@ -62,8 +74,7 @@ export function renderTasks(filter = 'all') {
         renderTasks(filter);
       });
 
-      li.append(checkbox, span, removeBtn);
-      li.appendChild(itemDiv);
+      li.append(leadingElement, span, removeBtn);
       listElement.appendChild(li);
     });
 }
