@@ -1,50 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="A simple and efficient todo list app to manage your daily tasks" name="description">
-  <meta content="#6750A4" name="theme-color">
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="A simple and efficient todo list app to manage your daily tasks" name="description" />
+  <meta content="#6750A4" name="theme-color" />
   <title>Todo List App</title>
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" crossorigin rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="./css/style.css" rel="stylesheet"/>
+  
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link href="https://fonts.gstatic.com" crossorigin rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="./css/style.css" rel="stylesheet" />
 </head>
+
 <body>
-<main class="todo-page__content">
+<main class="todo-page">
+  
   <h1 class="todo-page__title">My Todo List</h1>
-  <form class="todo-page__form">
-    <div class="todo-form__input-div">
-      <!--      <div id="todo-input-layout">-->
-      <label class="todo-form__input-label visually-hidden" for="todo-form__input">Task description</label>
-      <input id="todo-form__input" type="text" placeholder="Add a new task..." required/>
-      <!--      </div>-->
+  
+  <!--  Form Block -->
+  <form id="todo-form" class="todo-page__form todo-form">
+    
+    <div class="todo-form__input-wrapper">
+      <label class="todo-form__label visually-hidden" for="todo-input">
+        Task description
+      </label>
+      
+      <input
+          id="todo-input"
+          class="todo-form__input"
+          type="text"
+          placeholder="Add a new task..."
+          required
+      />
     </div>
-    <div class="todo-form__button-div">
-      <button class="todo-form__button button" type="submit">Add Task</button>
+    
+    <div class="todo-form__button-wrapper">
+      <button class="todo-form__button button" type="submit">
+        Add Task
+      </button>
     </div>
+    
   </form>
-  <section class="todo-page__filters-container">
+  
+  <!--  Filter Block -->
+  <section class="todo-page__filters">
+    
     <nav class="todo-filters" aria-label="Task filters" role="navigation">
-      <button id="filter-all" type="button" aria-pressed="true">All</button>
-      <button id="filter-active" type="button" aria-pressed="false">Active</button>
-      <button id="filter-completed" type="button" aria-pressed="false">Completed</button>
+      <button
+          id="filter-all"
+          class="todo-filters__button todo-filters__button--active"
+          type="button"
+          aria-pressed="true">
+        All
+      </button>
+      
+      <button
+          id="filter-active"
+          class="todo-filters__button"
+          type="button"
+          aria-pressed="false">
+        Active
+      </button>
+      
+      <button
+          id="filter-completed"
+          class="todo-filters__button"
+          type="button"
+          aria-pressed="false">
+        Completed
+      </button>
     </nav>
-    <div class="clear-completed">
-      <button id="clear-completed" type="button" aria-label="Clear all completed tasks">
-        <svg aria-hidden="true" fill="#e3e3e3" height="20px" viewBox="0 -960 960 960" width="20px"
-             xmlns="http://www.w3.org/2000/svg">
+    
+    <!--  Clear completed tasks block -->
+    <div class="todo-clear">
+      <button
+          id="clear-completed"
+          class="todo-clear__button"
+          type="button"
+          aria-label="Clear all completed tasks">
+        <svg aria-hidden="true" width="20px" height="20px" viewBox="0 -960 960 960">
           <path
-              d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/>
+              d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z" />
         </svg>
         Clear Completed
       </button>
     </div>
+    
   </section>
   
-  <ul id="todo-list" aria-label="Task list" aria-live="polite"></ul>
+  <!-- Task List -->
+  <ul id="todo-list" class="todo-page__list" aria-label="Task list" aria-live="polite"></ul>
+  
 </main>
+
 <script src="./js/main.js" type="module"></script>
 </body>
 </html>

@@ -5,68 +5,84 @@ const listElement = document.getElementById('todo-list');
 export function renderTasks(filter = 'all') {
   listElement.innerHTML = '';
 
-  getTasks().
-    filter(task => {
+  getTasks()
+    .filter((task) => {
       if (filter === 'all') return true;
       if (filter === 'active') return !task.completed;
       if (filter === 'completed') return task.completed;
-    }).forEach(task => {
+    })
+    .forEach((task) => {
+      /* -----------------------------
+       * LIST ITEM (todo-item)
+       * ----------------------------- */
       const li = document.createElement('li');
-      li.setAttribute("data-id", task.id);
+      li.classList.add("todo-item");
+      li.dataset.id = task.id;
 
-      const leadingElement = document.createElement('div');
-      leadingElement.classList.add('leading-element');
+      if (task.completed) {
+        li.classList.add("todo-item--completed");
+      }
 
-      const checkboxes = document.createElement('div');
-      checkboxes.classList.add('checkboxes');
+      /* -----------------------------
+      * CHECKBOX AREA
+      * Wrappers follow BEM structure:
+      * todo-item__checkbox-wrapper
+      * └── todo-item__checkbox-layer
+      *     └── todo-item__checkbox
+      * ----------------------------- */
+      const checkboxWrapper = document.createElement("div");
+      checkboxWrapper.classList.add("todo-item__checkbox-wrapper");
 
-      leadingElement.appendChild(checkboxes);
+      const checkboxLayer = document.createElement("div");
+      checkboxLayer.classList.add("todo-item__checkbox-layer");
 
-      const stateLayer = document.createElement('div');
-      stateLayer.classList.add('state-layer');
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
 
-      checkboxes.appendChild(stateLayer);
-
-      const checkbox = document.createElement('input');
-      checkbox.setAttribute('type', 'checkbox');
+      checkbox.classList.add("todo-item__checkbox");
       checkbox.checked = task.completed;
-      checkbox.addEventListener('change', () => {
+
+      checkbox.addEventListener("change", () => {
         toggleTask(task.id);
         renderTasks(filter);
       });
 
-      stateLayer.appendChild(checkbox);
+      checkboxLayer.appendChild(checkbox);
+      checkboxWrapper.appendChild(checkboxLayer);
 
-      const span = document.createElement('span');
+      /* -----------------------------
+       * TEXT SPAN (todo-item__text)
+       * ----------------------------- */
+      const span = document.createElement("span");
+      span.classList.add("todo-item__text");
       span.textContent = task.text;
-      if (task.completed) span.classList.add('completed');
-
-
-      if (task.completed) li.classList.add('completed');
-
 
       span.addEventListener('click', () => {
         toggleTask(task.id);
         renderTasks(filter);
       });
 
+      /* -----------------------------
+       * REMOVE BUTTON (todo-item__remove-btn)
+       * ----------------------------- */
       const removeBtn = document.createElement('button');
-      removeBtn.classList.add('remove-btn');
-      removeBtn.setAttribute('aria-label', 'Remove task');
+      removeBtn.classList.add("todo-item__remove-btn");
+      removeBtn.setAttribute("aria-label", "Remove task");
 
-      // cria o SVG dentro do botão
+      // SVG icon
       const svgns = "http://www.w3.org/2000/svg";
       const svg = document.createElementNS(svgns, "svg");
       svg.setAttribute("height", "1.5rem");
       svg.setAttribute("width", "1.5rem");
       svg.setAttribute("viewBox", "0 -960 960 960");
-      svg.setAttribute("fill", "#e3e3e3");
-      const path = document.createElementNS(svgns, "path");
-      path.setAttribute("d",
-          "m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
-      );
-      svg.appendChild(path);
 
+      const path = document.createElementNS(svgns, "path");
+      path.setAttribute(
+        "d",
+        "m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+      );
+
+      svg.appendChild(path);
       removeBtn.appendChild(svg);
 
       removeBtn.addEventListener('click', () => {
@@ -74,7 +90,10 @@ export function renderTasks(filter = 'all') {
         renderTasks(filter);
       });
 
-      li.append(leadingElement, span, removeBtn);
+      /* -----------------------------
+       * APPEND FINAL STRUCTURE
+       * ----------------------------- */
+      li.append(checkboxWrapper, span, removeBtn);
       listElement.appendChild(li);
     });
 }
